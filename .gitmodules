@@ -1,0 +1,66 @@
+[submodule "src/main/kernel"]
+	path = src/main/kernel
+	url = https://github.com/seL4/seL4
+[submodule "src/main/tools/seL4"]
+	path = src/main/tools/seL4
+	url = https://github.com/seL4/seL4_tools
+[submodule "src/main/tools/nanopb"]
+	path = src/main/tools/nanopb
+	url = https://github.com/nanopb/nanopb
+[submodule "src/main/tools/riscv-pk"]
+	path = src/main/tools/riscv-pk
+	url = https://github.com/riscv-software-src/riscv-pk
+[submodule "src/main/projects/musllibc"]
+	path = src/main/projects/musllibc
+	url = https://github.com/seL4/musllibc
+[submodule "src/main/projects/seL4_libs"]
+	path = src/main/projects/seL4_libs
+	url = https://github.com/seL4/seL4_libs
+[submodule "src/main/projects/seL4_project_libs"]
+	path = src/main/projects/seL4_project_libs
+	url = https://github.com/seL4/seL4_projects_libs
+[submodule "src/main/projects/sel4runtime"]
+	path = src/main/projects/sel4runtime
+	url = https://github.com/seL4/sel4runtime
+[submodule "src/main/projects/sel4test"]
+	path = src/main/projects/sel4test
+	url = https://github.com/seL4/sel4test
+[submodule "src/main/projects/util_libs"]
+	path = src/main/projects/util_libs
+	url = https://github.com/seL4/util_libs
+[submodule "src/main/tools/rumprun"]
+	path = src/main/tools/rumprun
+	url = https://github.com/seL4/rumprun.git
+[submodule "src/main/tools/opensbi"]
+	path = src/main/tools/opensbi
+	url = https://github.com/riscv/opensbi
+[submodule "src/main/tools/pruner"]
+	path = src/main/tools/pruner
+	url = https://github.com/seL4/pruner.git
+[submodule "src/main/tools/cogent"]
+	path = src/main/tools/cogent
+	url = https://github.com/NICTA/cogent
+[submodule "src/main/projects/cakeml_libs"]
+	path = src/main/projects/cakeml_libs
+	url = https://github.com/seL4/cakeml_libs.git
+[submodule "src/main/projects/camkes"]
+	path = src/main/projects/camkes
+	url = https://github.com/seL4/camkes.git
+[submodule "src/main/projects/camkes-tool"]
+	path = src/main/projects/camkes-tool
+	url = https://github.com/seL4/camkes-tool.git
+[submodule "src/main/projects/capdl"]
+	path = src/main/projects/capdl
+	url = https://github.com/seL4/capdl.git
+[submodule "src/main/projects/global-components"]
+	path = src/main/projects/global-components
+	url = https://github.com/seL4/global-components.git
+[submodule "src/main/projects/lwip"]
+	path = src/main/projects/lwip
+	url = https://git.savannah.gnu.org/git/lwip.git
+[submodule "src/main/projects/projects_libs"]
+	path = src/main/projects/projects_libs
+	url = https://github.com/seL4/projects_libs.git
+[submodule "src/main/projects/sel4-tutorials"]
+	path = src/main/projects/sel4-tutorials
+	url = https://github.com/seL4/sel4-tutorials.git
