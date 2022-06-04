@@ -1,0 +1,70 @@
+/*
+ * Usage: In order to use a CAmkES component instance <instanceName> of type
+ *        <TimeServerWrapper> and call the corresponding interface
+ *        <TimeServerWrapperInterface>, add the following lines to an another
+ *        CAmkES file. The CAmkES component instance <clientInstance> is defined
+ *        in the calling CAmkES file and must use the TimeServerWrapperInterface
+ *        itself.
+ *
+ * #include <TimeServerWrapper/TimeServerWrapper.camkes>
+ *
+ * assembly {
+ *     composition {
+ *         DECLARE_TIMESERVERWRAPPER_COMPONENT(<instanceName>)
+ * 
+ *         DECLARE_TIMESERVERWRAPPER_CONNECT(<instanceName>, <clientInstance>)
+ *     }
+ * 
+ *     configuration {
+ *         DECLARE_TIMESERVERWRAPPER_CONFIGURE()
+ *     }
+ * }
+ */
+
+import <std_connector.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <global-connectors.camkes>;
+
+/*
+ * Declare a CAmkES component instance of type TimeServerWrapper with the name
+ * <instanceName>.
+ */
+#define DECLARE_TIMESERVERWRAPPER_COMPONENT(instanceName) \
+        component TimeServer globalComponentsTimeServer; \
+        component TimeServerWrapper instanceName; \
+
+
+/*
+ * Declare a CAmkES connection between a component instance <instanceName> and
+ * <clientInstance>. The instance <clientInstance> must use the
+ * <TimeServerWrapperInterface> interface.
+ */
+#define DECLARE_TIMESERVERWRAPPER_CONNECT(instanceName, clientInstance) \
+        connection seL4TimeServer timeserverwrapper_timer(from instanceName.timeout, \
+                                                          to   globalComponentsTimeServer.the_timer); \
+        connection seL4RPCCall timeserverwrapper_conn(from clientInstance.timeServerWrapperInterface, \
+                                                      to   instanceName.timeServerWrapperInterface); \
+
+
+/*
+ * Declare a CAmkES configuration that configures the actual time server from
+ * global components.
+ */
+#define DECLARE_TIMESERVERWRAPPER_CONFIGURE() \
+        globalComponentsTimeServer.timers_per_client = 1; \
+
+/*
+ * Defines a CAmkES interface <TimeServerWrapperInterface>.
+ */
+procedure TimeServerWrapperInterface {
+    uint64_t getTime();
+    int sleep(uint64_t ns);
+};
+
+/*
+ * Defines a CAmkES component <TimeServerWrapper>.
+ */
+component TimeServerWrapper {
+    provides TimeServerWrapperInterface timeServerWrapperInterface;
+    uses Timer timeout;
+}

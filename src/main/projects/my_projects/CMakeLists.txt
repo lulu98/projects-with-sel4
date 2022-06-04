@@ -22,6 +22,22 @@ camkes_tool_setup_camkes_build_environment()
 
 sel4_projects_libs_import_libraries()
 
+set(MY_PROJECTS_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE STRING "")
+
+CAmkESAddImportPath(components)
+CAmkESAddCPPInclude(components)
+
+function(includeMyComponents)
+    foreach(
+        comp
+        IN
+        ITEMS
+        TimeServerWrapper
+    )
+        include("${MY_PROJECTS_DIR}/components/${comp}/CMakeLists.txt")
+    endforeach()
+endfunction()
+
 function(includeGlobalComponents)
     global_components_import_project()
 endfunction()
