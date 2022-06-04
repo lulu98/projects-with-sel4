@@ -1,0 +1,7 @@
+import "../../interfaces/Printer.idl4";
+
+component Client {
+    control;
+    uses MyPrinter pr;
+    uses TimeServerWrapperInterface timeServerWrapperInterface;
+}

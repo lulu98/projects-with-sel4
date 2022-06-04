@@ -1,0 +1,3 @@
+procedure MyPrinter {
+    void my_print(in string msg);
+}

@@ -1,0 +1,22 @@
+import <std_connector.camkes>;
+
+#include <TimeServerWrapper/TimeServerWrapper.camkes>
+import "components/Client/Client.camkes";
+import "components/Printer/Printer.camkes";
+
+assembly {
+    composition {
+        component Client client;
+        component Printer printer;
+
+        connection seL4RPCCall printer_con(from client.pr, to printer.pr);
+        
+        DECLARE_TIMESERVERWRAPPER_COMPONENT(timeServerWrapper)
+
+        DECLARE_TIMESERVERWRAPPER_CONNECT(timeServerWrapper, client)
+    }
+
+    configuration {
+        DECLARE_TIMESERVERWRAPPER_CONFIGURE()
+    }
+}

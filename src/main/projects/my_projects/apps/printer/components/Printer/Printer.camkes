@@ -1,0 +1,5 @@
+import "../../interfaces/Printer.idl4";
+
+component Printer {
+    provides MyPrinter pr;
+}
