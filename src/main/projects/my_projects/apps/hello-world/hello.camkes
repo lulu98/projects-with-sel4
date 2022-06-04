@@ -1,0 +1,9 @@
+component Client {
+    control;
+}
+
+assembly {
+    composition {
+        component Client client;
+    }
+}

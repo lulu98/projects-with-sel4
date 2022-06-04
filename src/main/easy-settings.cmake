@@ -1,0 +1,1 @@
+projects/my_projects/easy-settings.cmake
