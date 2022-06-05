@@ -9,14 +9,14 @@ the seL4 microkernel and CAmkES. Examplery projects can be found in
 To get a better understanding on how to build your own project, the following
 page is a good starting point:
 
-- https://docs.sel4.systems/projects/buildsystem/incorporating.html
+- <https://docs.sel4.systems/projects/buildsystem/incorporating.html>
 
 The project structure of this repository is mainly influenced by the following
 repositories:
 
-- https://github.com/seL4/sel4test-manifest
-- https://github.com/seL4/camkes-manifest
-- https://github.com/seL4/sel4-tutorials-manifest
+- <https://github.com/seL4/sel4test-manifest>
+- <https://github.com/seL4/camkes-manifest>
+- <https://github.com/seL4/sel4-tutorials-manifest>
 
 This repository features the following layout:
 
@@ -38,11 +38,11 @@ In the top-level directory there are the following build files:
 
 - `griddle`: not important for this project
 - `easy-settings.cmake`: Symbolic link to the `easy-settings.cmake` file in
-`src/main/projects/my_projects`
+  `src/main/projects/my_projects`
 - `init-build.sh`: Symbolic link to the default `init-build.sh` script in
-`src/main/tools/cmake-tool/init-build.sh`. This file determines based on the
-`easy-settings.cmake` in which directory the build process should be started,
-i.e. `src/main/projects/my_projects`.
+  `src/main/tools/cmake-tool/init-build.sh`. This file determines based on the
+  `easy-settings.cmake` in which directory the build process should be started,
+  i.e. `src/main/projects/my_projects`.
 
 ## Building an application
 
@@ -64,7 +64,6 @@ After letting `ninja` build the application for a platform, you can find the
 binary image in the `build/images` directory. This image can be copied on a
 micro-SD card and will be loaded and executed by the FSBL and SSBL.
 
-
 ### Simulation in QEMU
 
 If you do not have access to the real hardware, you can add the `-DSIMULATION=ON`
@@ -82,12 +81,12 @@ ninja
 
 CAmkES and seL4 projects have a lot of dependencies that must be installed:
 
-- https://docs.sel4.systems/projects/buildsystem/host-dependencies.html
+- <https://docs.sel4.systems/projects/buildsystem/host-dependencies.html>
 
 If you do not want all the dependencies on the host machine, you can simply use
 a Docker container:
 
-- https://docs.sel4.systems/projects/dockerfiles/
+- <https://docs.sel4.systems/projects/dockerfiles/>
 
 ## Guidelines
 
@@ -102,20 +101,20 @@ commit flags:
 - TEST: this flag refers to changes in test files
 - FIX: this flag refers to a functional fix
 - FORM: this flag refers to a fix that enhances the form, e.g. fixing spelling
-errors
+  errors
 - CICD: this flag refers to changes in the CICD pipeline
 
-A commit has the following form: 
+A commit has the following form:
 
 ```bash
 <hash> [<commit-flag>] <commit-message>
 ```
 
-## TODOs 
+## TODOs
 
 - Implement linter stages.
 - Create a simple CI/CD pipeline that builds and tests images for the Zynq7000
-and Zynqmp platform in QEMU.
+  and Zynqmp platform in QEMU.
 - Add unit tests for printer and hello world application.
 - Test the hello-world and printer app on the RPi4 hardware.
 - Create the LED Matrix Driver.
