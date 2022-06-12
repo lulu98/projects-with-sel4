@@ -64,3 +64,6 @@
 [submodule "src/main/projects/sel4-tutorials"]
 	path = src/main/projects/sel4-tutorials
 	url = https://github.com/seL4/sel4-tutorials.git
+[submodule "src/build-dependencies"]
+	path = src/build-dependencies
+	url = git@github.com:lulu98/seL4-CAmkES-L4v-dockerfiles.git
