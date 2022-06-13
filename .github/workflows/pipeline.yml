@@ -1,36 +1,40 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" and "development" branch
   push:
-    branches: [ "main", "development" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  # build and test stage combined in one job in order to save time because each
+  # job runs in a separate runner which has to pull the dependencies each time
+  # which takes a lot of time. And the caching does not properly work (at least
+  # for me).
+  # TODO: Cache docker image layers + haskell/stack dependencies
+  build_and_test:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install dependencies
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+             sudo apt-get install -y qemu-system-arm
+             sudo apt-get install -y python3-pip
+             pip install pytest
+             pip install pexpect
+
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v3
+        with:
+            submodules: recursive
+
+      - name: Build apps for platforms
+        working-directory: ./src
+        run: ./build.sh
+      
+      - name: Test apps for platforms
+        working-directory: ./src
+        run: ./test.sh
