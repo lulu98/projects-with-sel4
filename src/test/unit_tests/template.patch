@@ -1,0 +1,23 @@
+83,102c83
+<     notice(qemu_simulate_command)
+< 
+<     if qemu_gdbserver_command != "":
+<         notice('waiting for GDB on port 1234...')
+< 
+<     qemu_status = subprocess.call(qemu_simulate_command, shell=True)
+< 
+<     if qemu_status != 0:
+<         delay = 5  # in seconds
+<         # Force a newline onto the output stream.
+<         sys.stderr.write('\n')
+<         msg = "QEMU failed; resetting terminal in {d} seconds".format(d=delay) \
+<             + "--interrupt to abort\n"
+<         notice(msg)
+<     else:
+<         delay = 2  # in seconds
+< 
+<     time.sleep(delay)
+< 
+<     subprocess.call("tput reset", shell=True)
+---
+>     print(qemu_simulate_command)
