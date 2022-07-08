@@ -1,12 +1,8 @@
 #!/bin/bash
 
-BUILD_PLATFORMS=(
-    zynq7000
-)
-
-BUILD_APPS=(
-    hello-world
-    printer
+BUILD_APPS_PLATFORMS=(
+    "hello-world zynq7000 rpi4"
+    "printer     zynq7000"
 )
 
 CONTAINER_NAME="build-container"
@@ -16,9 +12,13 @@ SCRIPTPATH=`dirname ${SCRIPT}`
 # create docker build container
 ( cd build-dependencies; make user HOST_DIR=${SCRIPTPATH} CONTAINER_NAME=${CONTAINER_NAME} )
 
-for PLATFORM in "${BUILD_PLATFORMS[@]}"
+for APPS_PLATFORMS_STRING in "${BUILD_APPS_PLATFORMS[@]}"
 do
-    for CAMKES_APP in "${BUILD_APPS[@]}"
+    APPS_PLATFORMS_ARR=(${APPS_PLATFORMS_STRING})
+    CAMKES_APP="${APPS_PLATFORMS_ARR[0]}"    # get 1st elem
+    PLATFORMS=("${APPS_PLATFORMS_ARR[@]:1}") # get array starting from 2nd elem
+
+    for PLATFORM in "${PLATFORMS[@]}"
     do
         if [ "${PLATFORM}" == "rpi4" ]
         then

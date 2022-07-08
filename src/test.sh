@@ -1,12 +1,8 @@
 #!/bin/bash
 
-TEST_PLATFORMS=(
-    zynq7000
-)
-
-TEST_APPS=(
-    hello-world
-    printer
+TEST_APPS_PLATFORMS=(
+    "hello-world zynq7000"
+    "printer     zynq7000"
 )
 
 CONTAINER_NAME="test-container"
@@ -16,15 +12,14 @@ SCRIPTPATH=`dirname ${SCRIPT}`
 # create docker test container
 ( cd build-dependencies; make user HOST_DIR=${SCRIPTPATH} CONTAINER_NAME=${CONTAINER_NAME} )
 
-for PLATFORM in "${TEST_PLATFORMS[@]}"
+for APPS_PLATFORMS_STRING in "${TEST_APPS_PLATFORMS[@]}"
 do
-    for CAMKES_APP in "${TEST_APPS[@]}"
-    do
-        if [ "${PLATFORM}" == "rpi4" ]
-        then
-            EXTRA_ARGS+=" -DAARCH64=ON"
-        fi
+    APPS_PLATFORMS_ARR=(${APPS_PLATFORMS_STRING})
+    CAMKES_APP="${APPS_PLATFORMS_ARR[0]}"    # get 1st elem
+    PLATFORMS=("${APPS_PLATFORMS_ARR[@]:1}") # get array starting from 2nd elem
 
+    for PLATFORM in "${PLATFORMS[@]}"
+    do
         if [ "${PLATFORM}" == "zynq7000" ]
         then
             EXTRA_ARGS+=" -DSIMULATION=ON"
