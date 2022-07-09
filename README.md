@@ -1,48 +1,10 @@
 # My seL4 and CAmkES projects
 
 This repository should give an example on how to build your own projects with
-the seL4 microkernel and CAmkES. Examplery projects can be found in
-`src/main/project/my_projects`.
-
-## Project Layout
-
-To get a better understanding on how to build your own project, the following
-page is a good starting point:
-
-- <https://docs.sel4.systems/projects/buildsystem/incorporating.html>
-
-The project structure of this repository is mainly influenced by the following
-repositories:
-
-- <https://github.com/seL4/sel4test-manifest>
-- <https://github.com/seL4/camkes-manifest>
-- <https://github.com/seL4/sel4-tutorials-manifest>
-
-This repository features the following layout:
-
-```
-src/main/
-|__ kernel/
-|__ projects/
-|   |__ my_projects/    # directory featuring my applications
-|   |__ ...other libraries...
-|__ tools/
-|__ easy-settings.cmake
-|__ griddle
-|__ init-build.sh
-```
-
-## Build files
-
-In the top-level directory there are the following build files:
-
-- `griddle`: not important for this project
-- `easy-settings.cmake`: Symbolic link to the `easy-settings.cmake` file in
-  `src/main/projects/my_projects`
-- `init-build.sh`: Symbolic link to the default `init-build.sh` script in
-  `src/main/tools/cmake-tool/init-build.sh`. This file determines based on the
-  `easy-settings.cmake` in which directory the build process should be started,
-  i.e. `src/main/projects/my_projects`.
+the seL4 microkernel and CAmkES. This project basically provides a thing wrapper
+around the seL4 microkernel and supporting libraries. As a result, it could
+theoretically be extended to an Operating System (OS) that is based on the seL4
+microkernel. Exemplary projects can be found in `src/main/project/my_projects/`.
 
 ## Building an application
 
@@ -77,7 +39,7 @@ ninja
 ./simulate
 ```
 
-## Prerequisites
+## Build dependencies
 
 CAmkES and seL4 projects have a lot of dependencies that must be installed:
 
@@ -88,36 +50,9 @@ a Docker container:
 
 - <https://docs.sel4.systems/projects/dockerfiles/>
 
-## Guidelines
+## Wiki
 
-### Git
+For more detailed information on the implementation of this project, please
+refer to the following Wiki:
 
-In this project, commit flags are used in order for the developer to have a
-better understanding of what type a commit is. This project uses the following
-commit flags:
-
-- DEV: this flag refers to changes in the source code
-- DOC: this flag refers to changes in the documentation, e.g. Readme files
-- TEST: this flag refers to changes in test files
-- FIX: this flag refers to a functional fix
-- FORM: this flag refers to a fix that enhances the form, e.g. fixing spelling
-  errors
-- CICD: this flag refers to changes in the CICD pipeline
-
-A commit has the following form:
-
-```bash
-<hash> [<commit-flag>] <commit-message>
-```
-
-## TODOs
-
-- Implement linter stages.
-- Create a simple CI/CD pipeline that builds and tests images for the Zynq7000
-  and Zynqmp platform in QEMU.
-- Add unit tests for printer and hello world application.
-- Test the hello-world and printer app on the RPi4 hardware.
-- Create the LED Matrix Driver.
-- Create the LED Matrix App.
-- Extend CI/CD pipeline to also include the RPi4.
-- Extend CI/CD pipeline for a deployment stage onto RPi4.
+- [Project Wiki](https://github.com/lulu98/projects-with-seL4/wiki)
